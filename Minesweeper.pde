@@ -27,6 +27,7 @@ public void setMines()
 {
     int row = (int)(Math.random()*NUM_ROWS);
     int col = (int)(Math.random()*NUM_COLS);
+    if(!mines.contains(buttons[row][col]))
     mines.add(buttons[row][col]);
 }
 
@@ -51,13 +52,21 @@ public void displayWinningMessage()
 }
 public boolean isValid(int r, int c)
 {
-    //your code here
+    if((r >= 0 && r < NUM_ROWS) && (c >= 0 && c < NUM_COLS))
+    return true;
     return false;
 }
 public int countMines(int row, int col)
 {
     int numMines = 0;
-    //your code here
+    for(int i = row-1; i <= row+1; i++){
+      for(int g = col-1; g <= col+1; g++){
+        if((isValid(i,g)==true) && (mines.contains(buttons[i][g]))){
+          if(i != row || g != col)
+          numMines++;
+        }
+      }
+    } 
     return numMines;
 }
 public class MSButton
@@ -84,15 +93,36 @@ public class MSButton
     public void mousePressed () 
     {
         clicked = true;
-        //your code here
+        if(mouseButton == RIGHT){
+        if(clicked == true)
+        clicked = false;
+        
+        if(clicked == false)
+        clicked = true;
+      }
+        if(mines.contains(buttons[myRow][myCol]))
+        System.out.print("Game Over");
+        
+      if(countMines(myRow,myCol) > 0)
+       myLabel = Integer.toString(countMines(myRow,myCol));
+       
+        else
+        for(int r = myRow-1; r <= myRow+1; r++){
+          for(int c = myCol-1; c <= myCol+1; c++){
+            if(isValid(r,c) == true && buttons[r][c].flagged == false && !mines.contains(buttons[r][c]))
+             buttons[r][c].mousePressed();
+          }
+        }
+        
     }
     public void draw () 
     {    
         if (flagged)
             fill(0);
             
-        // else if( clicked && mines.contains(this) ) 
-        //     fill(255,0,0);
+        else if( clicked && mines.contains(this) ) 
+             fill(255,0,0);
+             
         else if(clicked)
             fill( 200 );
         else 
@@ -115,4 +145,3 @@ public class MSButton
         return flagged;
     }
 }
-
