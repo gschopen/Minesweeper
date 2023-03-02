@@ -110,7 +110,7 @@ public class MSButton
         if(mines.contains(buttons[myRow][myCol]))
         displayLosingMessage();
         
-      if(countMines(myRow,myCol) > 0)
+      if(countMines(myRow,myCol) > 0 && !mines.contains(buttons[myRow][myCol]))
        myLabel = Integer.toString(countMines(myRow,myCol));
        
         else
