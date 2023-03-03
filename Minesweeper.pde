@@ -51,6 +51,7 @@ public void displayLosingMessage()
 {
     buttons[NUM_ROWS/2][NUM_COLS/2].myLabel = "You";
     buttons[NUM_ROWS/2][(NUM_COLS/2)+2].myLabel = "Lost";
+   // exit();
 }
 public void displayWinningMessage()
 {
@@ -111,7 +112,7 @@ public class MSButton
         displayLosingMessage();
         
       if(countMines(myRow,myCol) > 0 && !mines.contains(buttons[myRow][myCol]))
-       myLabel = Integer.toString(countMines(myRow,myCol));
+       setLabel(countMines(myRow,myCol));
        
         else
         for(int r = myRow-1; r <= myRow+1; r++){
