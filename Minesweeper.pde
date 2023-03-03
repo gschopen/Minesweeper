@@ -116,7 +116,7 @@ public class MSButton
         else
         for(int r = myRow-1; r <= myRow+1; r++){
           for(int c = myCol-1; c <= myCol+1; c++){
-            if(isValid(r,c) == true && buttons[r][c].flagged == false && !mines.contains(buttons[r][c]))
+            if(isValid(r,c) == true && buttons[r][c].clicked == false && !mines.contains(buttons[r][c]))
              buttons[r][c].mousePressed();
           }
         }
